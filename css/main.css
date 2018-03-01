@@ -1,0 +1,144 @@
+body {
+    /* position: fixed;
+    top:0;
+    left:0;
+    right: 0;
+    /* bottom: 0; */
+    /* width: 100%; */
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mydiv {
+    padding: 20px 0 0 20px;
+    float:left;
+    margin: 0 0 20px 0;
+}
+
+.mybox {
+    height: auto;
+    width: 300px;
+    padding: 10px;
+    /* border:5px dashed #81C7D4; */
+    border:5px solid #81C7D4;
+    box-shadow: 0 0 2px #81C7D4;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s;
+    background-color: white;
+}
+
+.wrap {
+    width: 1060px;
+    height: auto;
+    margin: 55px auto;
+    position: relative;
+}
+
+.mybox img{
+    width:92%;
+    margin: 7px auto;
+    height:162px;
+    display: block;
+    border-radius: 3px;
+}
+
+.mybox:hover {
+    box-shadow: 0 0 10px #33A6B8;
+}
+
+.mydiv p {
+    margin: 8px;
+}
+
+.mydiv p:nth-of-type(1) {
+    font-size: 17px;
+    color: orange;
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 998;
+    display: none;
+}
+
+
+.showImg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 550px;
+    background-color: white;
+    margin-left: -400px;
+    margin-top: -275px;
+    z-index: 999;
+    border-radius: 10px;
+    border: 8px solid white;
+    display: none;
+    transition: all .3s;
+}
+
+.showImg img {
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+    position: absolute;
+    z-index: 996;
+}
+
+.show-index {
+    position: absolute;
+    width: 75px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
+
+.prev {
+    left: 0;
+}
+
+.btn1 {
+    position: absolute;
+    width: 80px;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    line-height: 550px;
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: all .5s;
+    z-index: 999;
+}
+
+.btn1>img {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+}
+
+.next {
+    right: 0;
+}
+
+.prev:hover,.next:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.clearfix:after,  
+.clearfix:before{content:" ";display:table;}  
+.clearfix:after{clear:both;}

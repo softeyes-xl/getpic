@@ -1,0 +1,58 @@
+.my-nav {
+    position: fixed;
+    height: 50px;
+    left: 0;
+    right: 0;
+    top: 0;
+    line-height: 50px;
+    background-color: pink;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    z-index: 999;
+}
+
+.my-nav-right {
+    position: absolute;
+    width: 360px;
+    height: 100%;
+    right: 0;
+    top: 0;
+}
+
+.my-nav-right input {
+    width: 200px;
+    height: 26px;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    outline: none;
+    font-size: 17px;
+    text-indent: 8px;
+    transition: all .5s;
+}
+
+/* .my-nav-right input:hover {
+    border-bottom: 2px solid black;
+}
+
+.my-nav-right input:focus {
+    border-bottom: 2px solid black;
+} */
+
+.my-nav-right button {
+    height: 35px;
+    width: 80px;
+    border-radius: 5px;
+    border: none;
+    /* border: 1px solid rgba(0, 0, 0, 0.5); */
+    cursor: pointer;
+    background-color: blanchedalmond;
+    transition: all .5s;
+    outline: none;
+}
+
+.my-nav-right button:hover {
+    background-color: bisque;
+    /* color: white; */
+}

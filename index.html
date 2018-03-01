@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>来搜个图吧~</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/nav.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.js"></script>
+</head>
+
+<body>
+    <nav class="my-nav">
+        <div class="my-nav-right">
+            <input type="text" id="myInput">
+            <button id="myBtn">搜图</button>
+        </div>
+    </nav>
+    <div class="wrap clearfix" id="wrap"></div>
+    <div class="showImg" id="showImg">
+        <img id='show-img' src="" alt="">
+        <span class="show-index" id="show-index"></span>
+        <span class="prev btn1" id="prev"><img src="./images/prev.png" alt=""></span>
+        <span class="next btn1" id="next"><img src="./images/next.png" alt=""></span>
+    </div>
+    <div class="mask" id="mask"></div>
+    
+    <script src='./js/create.js'></script>
+    <script src='./js/waterfall.js'></script>
+    <script src='./js/control.js'></script>
+</body>
+
+</html>
