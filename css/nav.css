@@ -4,25 +4,47 @@
     left: 0;
     right: 0;
     top: 0;
+    min-width: 780px;
     line-height: 50px;
     background-color: pink;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     z-index: 999;
+    overflow: hidden;
+}
+
+.my-nav-left {
+    /* min-width: 560px; */
+    width: 60%;
+    height: 100%;
+    float: left;
+    line-height: 50px;
+    box-sizing: border-box;
+    padding-left: 20px;
+}
+
+.my-nav-left p {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    letter-spacing: 3px;
+    text-align: center;
+    font-size: 16px;
 }
 
 .my-nav-right {
-    position: absolute;
-    width: 360px;
+    float: left;
+    width: 40%;
     height: 100%;
-    right: 0;
-    top: 0;
+    /* right: 0;
+    top: 0; */
 }
 
 .my-nav-right input {
-    width: 200px;
+    width: 55%;
     height: 26px;
+    float: left;
     border: none;
     border-bottom: 1px solid black;
     background-color: transparent;
@@ -30,19 +52,18 @@
     font-size: 17px;
     text-indent: 8px;
     transition: all .5s;
+    margin-top: 12px;
+    box-sizing: border-box;
+    margin-left: 7%;
 }
-
-/* .my-nav-right input:hover {
-    border-bottom: 2px solid black;
-}
-
-.my-nav-right input:focus {
-    border-bottom: 2px solid black;
-} */
 
 .my-nav-right button {
+    float: right;
+    margin-top: 7px;
+    margin-right: 7%;
     height: 35px;
-    width: 80px;
+    width: 25%;
+    max-width: 120px;
     border-radius: 5px;
     border: none;
     /* border: 1px solid rgba(0, 0, 0, 0.5); */

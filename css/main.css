@@ -1,10 +1,4 @@
 body {
-    /* position: fixed;
-    top:0;
-    left:0;
-    right: 0;
-    /* bottom: 0; */
-    /* width: 100%; */
     height: auto;
     background-color: rgba(0, 0, 0, 0.2);
 }
@@ -38,7 +32,7 @@ body {
 .mybox img{
     width:92%;
     margin: 7px auto;
-    height:162px;
+    height: auto;
     display: block;
     border-radius: 3px;
 }
@@ -109,9 +103,9 @@ body {
 
 .btn1 {
     position: absolute;
-    width: 80px;
-    top: 0;
-    bottom: 0;
+    width: 60px;
+    top: 40%;
+    bottom: 40%;
     text-align: center;
     line-height: 550px;
     font-size: 30px;
@@ -122,13 +116,13 @@ body {
 }
 
 .btn1>img {
-    width: 50px;
-    height: 50px;
+    width: 36px;
+    height: 36px;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -25px;
-    margin-top: -25px;
+    margin-left: -18px;
+    margin-top: -18px;
 }
 
 .next {

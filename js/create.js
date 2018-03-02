@@ -10,6 +10,7 @@ var b = 1;
 function createDiv(myId) {
     var myData1 = [];
     var myWrap = document.getElementsByClassName('wrap')[0];
+    myWrap.innerHTML = '';
     $.ajax({
         url: 'https://rate.tmall.com/list_detail_rate.htm?itemId='+myId+'&spuId=811914664&sellerId=1751864252&order=3&currentPage=1&append=0&content=1&tagId=&posi=&picture=1&ua=098%23E1hvk9vovL%2BvUQCkvvvvvjiPPL5pzjtWn2cytjEUPmPvQj3Rn2LOtj18R2MvljYWRLsOdphvhIpCGSNjvvC82AZNLXcXrb8qKLyCvvpvvhCvRphvCvvvphvtvpvhvvCvpUwCvvpv9hCvvphvC9mvphvvvbyCvm9vvhCfvvvvvvvvBGwvvUjrvvCj1Qvvv3QvvhNjvvvmF9vvBGwvvv8RuphvmvvvpoH5aJn8kphvC9hvpy2O6vyCvhQmMerdjc7ZHd8raAugQfutnCpDNr3lDC4655DEtRv7RqJ6EvLvqbVQKfE9xJFE%2BFuTRogRD76Xe4TJnDeDyBvOHdUf8w1l5FKzrmph2QhvCPMMvvvtvpvhvvCvp8wCvvpvvhHhCQhvCYsw7DdNzgArvpvp9QREF%2B9vv2x0%2BoYC6XZzRu6CvvyvvFGzLpvvPWGjvpvEjn147rGhWIy89phvHnQwj7WLzYswzWlL7%2FGWzCqwqHiI&isg=Amhox7Zjpl8Pmorbl46_TsBjOV-6OQt3rcJzaSKZLOPNfQnnyKNfK-f_CSN2&needFold=0&_ksTS=1515475328740_1237',
         dataType: 'jsonp',
@@ -37,13 +38,22 @@ function createDiv(myId) {
                 for (var i = 0; i < myData1[j].pics.length; i++) {
                     var img = document.createElement('img');
                     img.className = 'myimg';
+                    var newImg = new Image();
+                    newImg.src = 'http:' + myData1[j].pics[i]
                     // img.src = 'http:' + myData1[j].pics[i];
                     img.setAttribute('data-original','http:' + myData1[j].pics[i]);
                     img.setAttribute('data-index2', i);
                     img.setAttribute('data-index1', j);
                     img.setAttribute('data-num', myData1[j].pics.length);
-                    img.setAttribute('onclick', 'showImgDiv')
+                    img.setAttribute('onclick', 'showImgDiv');
+                    var bili = 276 / newImg.width;
+                    console.log(bili)
+                    img.style.width = 276 + 'px';
+                    // img.style.height = newImg.height * bili + 'px';
+                    img.style.height = 376 + 'px';
                     mybox.appendChild(img);
+                    // console.log(newImg.width);
+                    // console.log(newImg.height);
                 }
                 mybox.className = 'mybox';
                 mybox.id = 'mybox';
@@ -53,7 +63,6 @@ function createDiv(myId) {
             }
             showImgDiv();
             $("img").lazyload();
-            ajaxOk();
         }
     })
 
@@ -202,6 +211,14 @@ $('#prev').on('click', function () {
 
 // 点击函数
 function clickBtn() {
+    var img1 = new Image();
+    img1.src = myarr[myindex];
+    h = img1.height;
+    w = img1.width;
+    $('#show-index').html(a + ' / ' + b);
+    $('#show-img').attr('src', myarr[myindex]);
+    changeImgSize($('#showImg'), h, w, $('#prev'), $('#next'))
+}function clickBtn() {
     var img1 = new Image();
     img1.src = myarr[myindex];
     h = img1.height;

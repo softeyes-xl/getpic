@@ -5,7 +5,6 @@ function ajaxOk() {
             var oParent = document.getElementById('wrap');// 父级对象
             waterfall('wrap','mydiv');
         };
-        console.log(1)
 }
 
 /*
