@@ -37,7 +37,12 @@ function createDiv(myId) {
                 p2.innerHTML = myData1[j].rateContent;
                 p3.innerHTML = myData1[j].auctionSku;
                 mybox.appendChild(p1);
-                mybox.appendChild(p3);
+                if(myData1[j].auctionSku == '') {
+                    // do nothing
+                }else {
+                    mybox.appendChild(p3);
+                }
+                
                 mybox.appendChild(p2);
                 console.log(myData1[j])
                 for (var i = 0; i < myData1[j].pics.length; i++) {
