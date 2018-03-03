@@ -15,26 +15,31 @@ function createDiv(myId) {
         url: 'https://rate.tmall.com/list_detail_rate.htm?itemId='+myId+'&spuId=811914664&sellerId=1751864252&order=3&currentPage=1&append=0&content=1&tagId=&posi=&picture=1&ua=098%23E1hvk9vovL%2BvUQCkvvvvvjiPPL5pzjtWn2cytjEUPmPvQj3Rn2LOtj18R2MvljYWRLsOdphvhIpCGSNjvvC82AZNLXcXrb8qKLyCvvpvvhCvRphvCvvvphvtvpvhvvCvpUwCvvpv9hCvvphvC9mvphvvvbyCvm9vvhCfvvvvvvvvBGwvvUjrvvCj1Qvvv3QvvhNjvvvmF9vvBGwvvv8RuphvmvvvpoH5aJn8kphvC9hvpy2O6vyCvhQmMerdjc7ZHd8raAugQfutnCpDNr3lDC4655DEtRv7RqJ6EvLvqbVQKfE9xJFE%2BFuTRogRD76Xe4TJnDeDyBvOHdUf8w1l5FKzrmph2QhvCPMMvvvtvpvhvvCvp8wCvvpvvhHhCQhvCYsw7DdNzgArvpvp9QREF%2B9vv2x0%2BoYC6XZzRu6CvvyvvFGzLpvvPWGjvpvEjn147rGhWIy89phvHnQwj7WLzYswzWlL7%2FGWzCqwqHiI&isg=Amhox7Zjpl8Pmorbl46_TsBjOV-6OQt3rcJzaSKZLOPNfQnnyKNfK-f_CSN2&needFold=0&_ksTS=1515475328740_1237',
         dataType: 'jsonp',
         success: function (data) {
-            var myData = data.rateDetail['rateList'];
-            myData1 = [];
-            for (var i = 0; i < myData.length; i++) {
-                myData1[i] = {};
-                myData1[i].rateContent = myData[i].rateContent
-                myData1[i].rateDate = myData[i].rateDate
-                myData1[i].pics = myData[i].pics
-                myData1[i].displayUserNick = myData[i].displayUserNick
-            }
+            console.log(data)
+            var myData1 = data.rateDetail['rateList'];
+            // myData1 = [];
+            // for (var i = 0; i < myData.length; i++) {
+            //     myData1[i] = {};
+            //     myData1[i].rateContent = myData[i].rateContent
+            //     myData1[i].rateDate = myData[i].rateDate
+            //     myData1[i].pics = myData[i].pics
+            //     myData1[i].displayUserNick = myData[i].displayUserNick
+            // }
 
             for (var j = 0; j < myData1.length; j++) {
                 var mydiv = document.createElement('div');
                 var mybox = document.createElement('div');
                 var p1 = document.createElement('p');
                 var p2 = document.createElement('p');
+                var p3 = document.createElement('p');
                 var p1Text = myData1[j].rateDate + '：' + myData1[j].displayUserNick + ' 评论';
                 p1.innerHTML = p1Text;
                 p2.innerHTML = myData1[j].rateContent;
+                p3.innerHTML = myData1[j].auctionSku;
                 mybox.appendChild(p1);
+                mybox.appendChild(p3);
                 mybox.appendChild(p2);
+                console.log(myData1[j])
                 for (var i = 0; i < myData1[j].pics.length; i++) {
                     var img = document.createElement('img');
                     img.className = 'myimg';
@@ -49,7 +54,7 @@ function createDiv(myId) {
                     img.setAttribute('onclick', 'showImgDiv');
                     var bili = 300 / newImg.width;
                     img.style.width = newImg.width * bili + 'px';
-                    console.log(newImg.height);
+                    // console.log(newImg.height);
                     img.style.height = newImg.height * bili + 'px';
                     mybox.appendChild(img);
                 }
@@ -129,12 +134,49 @@ function changeImgSize(par,h,w,prev,next) {
             h = h * 0.175;
             w = w * 0.175;
         }
-
         else if(h >= 3000) {
             h = h * 0.205;
             w = w * 0.205;
         }
+        else if(h >= 2500) {
+            h = h * 0.225;
+            w = w * 0.225;
+        }
+        else if(h >= 2200) {
+            h = h * 0.325;
+            w = w * 0.325;
+        }
+        else if(h >= 1920) {
+            h = h * 0.355;
+            w = w * 0.355;
+        }
+        else if(h >= 1500) {
+            h = h * 0.505;
+            w = w * 0.505;
+        }
+        else if(h >= 1280) {
+            h = h * 0.555;
+            w = w * 0.555;
+        }
+        else if (h >= 1000) {
+            h = h * 0.655;
+            w = w * 0.655;
+        } else if (h >= 700) {
+            h = h * 0.855;
+            w = w * 0.855;
+        }
 
+        showImgChangePos(par, h, w, prev, next)
+    }
+    else if(w = h) {
+        if(h >= 3800) {
+            h = h * 0.175;
+            w = w * 0.175;
+        }
+        else if(h >= 3000) {
+            h = h * 0.205;
+            w = w * 0.205;
+        }
         else if(h >= 2500) {
             h = h * 0.225;
             w = w * 0.225;
@@ -142,6 +184,10 @@ function changeImgSize(par,h,w,prev,next) {
         else if(h >= 2200) {
             h = h * 0.425;
             w = w * 0.425;
+        }
+        else if(h >= 1920) {
+            h = h * 0.555;
+            w = w * 0.555;
         }
         else if(h >= 1500) {
             h = h * 0.555;
@@ -158,9 +204,8 @@ function changeImgSize(par,h,w,prev,next) {
             h = h * 0.855;
             w = w * 0.855;
         }
-
-        showImgChangePos(par, h, w, prev, next)
-    } else {
+    }
+    else {
         if(w >= 3800) {
             h = h * 0.185;
             w = w * 0.185;
@@ -172,6 +217,10 @@ function changeImgSize(par,h,w,prev,next) {
         else if(w >= 2500) {
             h = h * 0.355;
             w = w * 0.355;
+        }
+        else if(w >= 1920) {
+            h = h * 0.65;
+            w = w * 0.65;
         }
         else if(w >= 1500) {
             h = h * 0.85;
@@ -244,14 +293,6 @@ $('#prev').on('click', function () {
 
 // 点击函数
 function clickBtn() {
-    var img1 = new Image();
-    img1.src = myarr[myindex];
-    h = img1.height;
-    w = img1.width;
-    $('#show-index').html(a + ' / ' + b);
-    $('#show-img').attr('src', myarr[myindex]);
-    changeImgSize($('#showImg'), h, w, $('#prev'), $('#next'))
-}function clickBtn() {
     var img1 = new Image();
     img1.src = myarr[myindex];
     h = img1.height;

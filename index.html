@@ -5,7 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="http://www.wuyayu.cn/my/beta1/moon.ico" type="image/x-icon">
     <title>来搜个图吧~</title>
+    <style>
+        .loadFade {
+            opacity: 1;
+            transition: all .5s linear;
+            transition-delay: 1s;
+        }
+    </style>
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/nav.css">
     <link rel="stylesheet" href="./css/load.css">
@@ -27,46 +35,75 @@
     <div class="showImg" id="showImg">
         <img id='show-img' src="" alt="">
         <span class="show-index" id="show-index"></span>
-        <span class="prev btn1" id="prev"><img src="./images/prev.png" alt=""></span>
-        <span class="next btn1" id="next"><img src="./images/next.png" alt=""></span>
+        <span class="prev btn1" id="prev">
+            <img src="./images/prev.png" alt="">
+        </span>
+        <span class="next btn1" id="next">
+            <img src="./images/next.png" alt="">
+        </span>
     </div>
     <div class="mask" id="mask"></div>
     <div class="bgImg"></div>
     <div class="lds-css ng-scope">
         <div class="lds-spinner" style="100%;height:100%">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
         <p>正在加载,请稍后...</p>
-    </div>    
+    </div>
     <script>
         // 公共变量
         var loadTimer = null;
-        var lastId = null; 
+        var lastId = null;
         var getId = null;
         var haveId = false;
+
+        function CreateLoadDiv(id, loadImgUrl, fatherDom, bgColor) {
+            this.ele = document.createElement('div');
+            this.ele.setAttribute('id', id);
+            this.ele.style.background = 'url(' + loadImgUrl + ')' + ' no-repeat ' + ' center ' + ' center ' + bgColor;
+            this.ele.style.position = 'fixed';
+            this.ele.className = 'loadFade';
+            this.ele.style.top = 0;
+            this.ele.style.left = 0;
+            this.ele.style.right = 0;
+            this.ele.style.bottom = 0;
+            this.ele.style.zIndex = 9999;
+            fatherDom.appendChild(this.ele);
+        }
+        var myLoadDiv = new CreateLoadDiv('myload', 'http://p46wrelzu.bkt.clouddn.com/load2.gif', document.body,
+            'rgb(255,255,255)');
+        document.onreadystatechange = function () {
+            var loadTimer = null;
+            if (document.readyState == "complete") {
+                document.getElementById('myload').style.opacity = 0;
+                loadTimer = setTimeout(function () {
+                    document.getElementById('myload').style.display = 'none';
+                }, 1500);
+            }
+        }
     </script>
     <script src='./js/create.js'></script>
     <script src='./js/waterfall.js'></script>
