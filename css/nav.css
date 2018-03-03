@@ -6,12 +6,13 @@
     top: 0;
     min-width: 780px;
     line-height: 50px;
-    background-color: pink;
+    background-color: rgba(248, 195, 205, 0.7);
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     z-index: 999;
     overflow: hidden;
+    color: white;
 }
 
 .my-nav-left {
@@ -55,6 +56,7 @@
     margin-top: 12px;
     box-sizing: border-box;
     margin-left: 7%;
+    font-family: '仿宋';
 }
 
 .my-nav-right button {
@@ -68,12 +70,15 @@
     border: none;
     /* border: 1px solid rgba(0, 0, 0, 0.5); */
     cursor: pointer;
-    background-color: blanchedalmond;
+    background-color: rgba(163, 228, 177, 0.7);
     transition: all .5s;
     outline: none;
+    color: rgb(112, 85, 115);
+    font-family: '仿宋';
+    font-size: 16px;
 }
 
 .my-nav-right button:hover {
-    background-color: bisque;
+    background-color: rgba(163, 228, 177, 1);
     /* color: white; */
 }

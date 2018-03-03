@@ -42,18 +42,16 @@ function createDiv(myId) {
                     newImg.src = 'http:' + myData1[j].pics[i]
                     // img.src = 'http:' + myData1[j].pics[i];
                     img.setAttribute('data-original','http:' + myData1[j].pics[i]);
+                    img.setAttribute('src','http:' + myData1[j].pics[i]);
                     img.setAttribute('data-index2', i);
                     img.setAttribute('data-index1', j);
                     img.setAttribute('data-num', myData1[j].pics.length);
                     img.setAttribute('onclick', 'showImgDiv');
-                    var bili = 276 / newImg.width;
-                    console.log(bili)
-                    img.style.width = 276 + 'px';
-                    // img.style.height = newImg.height * bili + 'px';
-                    img.style.height = 376 + 'px';
+                    var bili = 300 / newImg.width;
+                    img.style.width = newImg.width * bili + 'px';
+                    console.log(newImg.height);
+                    img.style.height = newImg.height * bili + 'px';
                     mybox.appendChild(img);
-                    // console.log(newImg.width);
-                    // console.log(newImg.height);
                 }
                 mybox.className = 'mybox';
                 mybox.id = 'mybox';
@@ -62,9 +60,22 @@ function createDiv(myId) {
                 myWrap.appendChild(mydiv);
             }
             showImgDiv();
-            $("img").lazyload();
+        },
+        complete: function() {
+            loadTimer = setTimeout(function() {
+                $('.lds-css').fadeOut(1000);
+                ajaxOk();          
+                showScroll();
+                $("img").lazyload();
+            },1000);
+            // console.log('完成!')
         }
     })
+
+}
+
+//img图片大小重置
+function rePic() {
 
 }
 
@@ -94,7 +105,7 @@ function showImgDiv() {
             e.stopPropagation();
             $('#mask').fadeIn();
             $('#showImg').fadeIn();
-            hideScroll()
+            // hideScroll()
             a = this.getAttribute('data-index2') - 0 + 1;
             b = this.getAttribute('data-num') - 0;
             $('#show-index').html(a + ' / ' + b);
@@ -114,29 +125,51 @@ function changeImgSize(par,h,w,prev,next) {
     // console.log(h)
     // 判断图片大小
     if (h > w) {
-        if(h >= 2500) {
-            h = h * 0.255;
-            w = w * 0.255;
+        if(h >= 3800) {
+            h = h * 0.175;
+            w = w * 0.175;
+        }
+
+        else if(h >= 3000) {
+            h = h * 0.205;
+            w = w * 0.205;
+        }
+
+        else if(h >= 2500) {
+            h = h * 0.225;
+            w = w * 0.225;
+        }
+        else if(h >= 2200) {
+            h = h * 0.425;
+            w = w * 0.425;
         }
         else if(h >= 1500) {
             h = h * 0.555;
             w = w * 0.555;
         }
         else if(h >= 1280) {
-            h = h * 0.655;
-            w = w * 0.655;
+            h = h * 0.555;
+            w = w * 0.555;
         }
         else if (h >= 1000) {
-            h = h * 0.755;
-            w = w * 0.755;
+            h = h * 0.655;
+            w = w * 0.655;
         } else if (h >= 700) {
-            h = h * 0.9;
-            w = w * 0.9;
+            h = h * 0.855;
+            w = w * 0.855;
         }
 
         showImgChangePos(par, h, w, prev, next)
     } else {
-        if(w >= 2500) {
+        if(w >= 3800) {
+            h = h * 0.185;
+            w = w * 0.185;
+        }
+        else if(w >= 3000) {
+            h = h * 0.205;
+            w = w * 0.205;
+        }
+        else if(w >= 2500) {
             h = h * 0.355;
             w = w * 0.355;
         }
@@ -191,7 +224,7 @@ $('#showImg').on('click', function (e) {
 $('body').on('click', function (e) {
     e.stopPropagation();
     $('#mask').fadeOut();
-    $('#showImg').fadeOut();
+    $('#showImg').hide();
     showScroll();
 })
 $('#next').on('click', function () {

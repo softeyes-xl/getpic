@@ -1,12 +1,23 @@
 body {
     height: auto;
-    background-color: rgba(0, 0, 0, 0.2);
+    font-family: 'Microsoft YaHei';
+}
+
+.bgImg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../images/bg.jpg') no-repeat;
+    background-size: cover;
+    z-index: -1;
 }
 
 .mydiv {
     padding: 20px 0 0 20px;
     float:left;
-    margin: 0 0 20px 0;
+    /* margin: 0 0 20px 0; */
 }
 
 .mybox {
@@ -14,12 +25,12 @@ body {
     width: 300px;
     padding: 10px;
     /* border:5px dashed #81C7D4; */
-    border:5px solid #81C7D4;
+    border:5px solid rgba(248, 195, 205, 0.7);
     box-shadow: 0 0 2px #81C7D4;
     border-radius: 5px;
-    cursor: pointer;
+    /* cursor: pointer; */
     transition: all .3s;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .wrap {
@@ -30,19 +41,22 @@ body {
 }
 
 .mybox img{
-    width:92%;
-    margin: 7px auto;
+    width:100%;
+    margin: 1px auto;
     height: auto;
     display: block;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .mybox:hover {
-    box-shadow: 0 0 10px #33A6B8;
+    box-shadow: 0 0 10px white;
 }
 
 .mydiv p {
-    margin: 8px;
+    margin: 0 0 8px 0;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
 .mydiv p:nth-of-type(1) {
