@@ -10,75 +10,81 @@ var b = 1;
 function createDiv(myId) {
     var myData1 = [];
     var myWrap = document.getElementsByClassName('wrap')[0];
+    var ifData = false;
     myWrap.innerHTML = '';
     $.ajax({
-        url: 'https://rate.tmall.com/list_detail_rate.htm?itemId='+myId+'&spuId=811914664&sellerId=1751864252&order=3&currentPage=1&append=0&content=1&tagId=&posi=&picture=1&ua=098%23E1hvk9vovL%2BvUQCkvvvvvjiPPL5pzjtWn2cytjEUPmPvQj3Rn2LOtj18R2MvljYWRLsOdphvhIpCGSNjvvC82AZNLXcXrb8qKLyCvvpvvhCvRphvCvvvphvtvpvhvvCvpUwCvvpv9hCvvphvC9mvphvvvbyCvm9vvhCfvvvvvvvvBGwvvUjrvvCj1Qvvv3QvvhNjvvvmF9vvBGwvvv8RuphvmvvvpoH5aJn8kphvC9hvpy2O6vyCvhQmMerdjc7ZHd8raAugQfutnCpDNr3lDC4655DEtRv7RqJ6EvLvqbVQKfE9xJFE%2BFuTRogRD76Xe4TJnDeDyBvOHdUf8w1l5FKzrmph2QhvCPMMvvvtvpvhvvCvp8wCvvpvvhHhCQhvCYsw7DdNzgArvpvp9QREF%2B9vv2x0%2BoYC6XZzRu6CvvyvvFGzLpvvPWGjvpvEjn147rGhWIy89phvHnQwj7WLzYswzWlL7%2FGWzCqwqHiI&isg=Amhox7Zjpl8Pmorbl46_TsBjOV-6OQt3rcJzaSKZLOPNfQnnyKNfK-f_CSN2&needFold=0&_ksTS=1515475328740_1237',
+        url: 'https://rate.tmall.com/list_detail_rate.htm?itemId=' + myId + '&spuId=811914664&sellerId=1751864252&order=3&currentPage=1&append=0&content=1&tagId=&posi=&picture=1&ua=098%23E1hvk9vovL%2BvUQCkvvvvvjiPPL5pzjtWn2cytjEUPmPvQj3Rn2LOtj18R2MvljYWRLsOdphvhIpCGSNjvvC82AZNLXcXrb8qKLyCvvpvvhCvRphvCvvvphvtvpvhvvCvpUwCvvpv9hCvvphvC9mvphvvvbyCvm9vvhCfvvvvvvvvBGwvvUjrvvCj1Qvvv3QvvhNjvvvmF9vvBGwvvv8RuphvmvvvpoH5aJn8kphvC9hvpy2O6vyCvhQmMerdjc7ZHd8raAugQfutnCpDNr3lDC4655DEtRv7RqJ6EvLvqbVQKfE9xJFE%2BFuTRogRD76Xe4TJnDeDyBvOHdUf8w1l5FKzrmph2QhvCPMMvvvtvpvhvvCvp8wCvvpvvhHhCQhvCYsw7DdNzgArvpvp9QREF%2B9vv2x0%2BoYC6XZzRu6CvvyvvFGzLpvvPWGjvpvEjn147rGhWIy89phvHnQwj7WLzYswzWlL7%2FGWzCqwqHiI&isg=Amhox7Zjpl8Pmorbl46_TsBjOV-6OQt3rcJzaSKZLOPNfQnnyKNfK-f_CSN2&needFold=0&_ksTS=1515475328740_1237',
         dataType: 'jsonp',
         success: function (data) {
-            console.log(data)
-            var myData1 = data.rateDetail['rateList'];
-            // myData1 = [];
-            // for (var i = 0; i < myData.length; i++) {
-            //     myData1[i] = {};
-            //     myData1[i].rateContent = myData[i].rateContent
-            //     myData1[i].rateDate = myData[i].rateDate
-            //     myData1[i].pics = myData[i].pics
-            //     myData1[i].displayUserNick = myData[i].displayUserNick
-            // }
+            if (data.rateDetail['rateList'] == '') {
+                ifData = false;
+                var noData = document.createElement('p');
+                noData.innerHTML = '暂无数据,或请输入正确的id';
+                noData.className = 'nodata'               
+                clearTimeout(loadTimer);
+                loadTimer = setTimeout(function () {
+                    $('.lds-css').fadeOut(1000);
+                    myWrap.appendChild(noData);
+                }, 1000);
+            } else {
+                ifData = true;
+                var myData1 = data.rateDetail['rateList'];
+                for (var j = 0; j < myData1.length; j++) {
+                    var mydiv = document.createElement('div');
+                    var mybox = document.createElement('div');
+                    var p1 = document.createElement('p');
+                    var p2 = document.createElement('p');
+                    var p3 = document.createElement('p');
+                    var p1Text = myData1[j].rateDate + '：' + myData1[j].displayUserNick + ' 评论';
+                    p1.innerHTML = p1Text;
+                    p2.innerHTML = myData1[j].rateContent;
+                    p3.innerHTML = myData1[j].auctionSku;
+                    mybox.appendChild(p1);
+                    if (myData1[j].auctionSku == '') {
+                        // do nothing
+                    } else {
+                        mybox.appendChild(p3);
+                    }
 
-            for (var j = 0; j < myData1.length; j++) {
-                var mydiv = document.createElement('div');
-                var mybox = document.createElement('div');
-                var p1 = document.createElement('p');
-                var p2 = document.createElement('p');
-                var p3 = document.createElement('p');
-                var p1Text = myData1[j].rateDate + '：' + myData1[j].displayUserNick + ' 评论';
-                p1.innerHTML = p1Text;
-                p2.innerHTML = myData1[j].rateContent;
-                p3.innerHTML = myData1[j].auctionSku;
-                mybox.appendChild(p1);
-                if(myData1[j].auctionSku == '') {
-                    // do nothing
-                }else {
-                    mybox.appendChild(p3);
+                    mybox.appendChild(p2);
+                    // console.log(myData1[j])
+                    for (var i = 0; i < myData1[j].pics.length; i++) {
+                        var img = document.createElement('img');
+                        img.className = 'myimg';
+                        var newImg = new Image();
+                        newImg.src = 'http:' + myData1[j].pics[i]
+                        // img.src = 'http:' + myData1[j].pics[i];
+                        // img.setAttribute('data-original', 'http:' + myData1[j].pics[i]);
+                        img.setAttribute('src','http:' + myData1[j].pics[i]);
+                        img.setAttribute('data-index2', i);
+                        img.setAttribute('data-index1', j);
+                        img.setAttribute('data-num', myData1[j].pics.length);
+                        img.setAttribute('onclick', 'showImgDiv');
+                        var bili = 300 / newImg.width;
+                        img.style.width = newImg.width * bili + 'px';
+                        img.style.height = newImg.height * bili + 'px';
+                        mybox.appendChild(img);
+                    }
+                    mybox.className = 'mybox';
+                    mybox.id = 'mybox';
+                    mydiv.className = 'mydiv';
+                    mydiv.appendChild(mybox);
+                    myWrap.appendChild(mydiv);
                 }
-                
-                mybox.appendChild(p2);
-                console.log(myData1[j])
-                for (var i = 0; i < myData1[j].pics.length; i++) {
-                    var img = document.createElement('img');
-                    img.className = 'myimg';
-                    var newImg = new Image();
-                    newImg.src = 'http:' + myData1[j].pics[i]
-                    // img.src = 'http:' + myData1[j].pics[i];
-                    img.setAttribute('data-original','http:' + myData1[j].pics[i]);
-                    img.setAttribute('src','http:' + myData1[j].pics[i]);
-                    img.setAttribute('data-index2', i);
-                    img.setAttribute('data-index1', j);
-                    img.setAttribute('data-num', myData1[j].pics.length);
-                    img.setAttribute('onclick', 'showImgDiv');
-                    var bili = 300 / newImg.width;
-                    img.style.width = newImg.width * bili + 'px';
-                    // console.log(newImg.height);
-                    img.style.height = newImg.height * bili + 'px';
-                    mybox.appendChild(img);
-                }
-                mybox.className = 'mybox';
-                mybox.id = 'mybox';
-                mydiv.className = 'mydiv';
-                mydiv.appendChild(mybox);
-                myWrap.appendChild(mydiv);
+                showImgDiv();
             }
-            showImgDiv();
         },
-        complete: function() {
-            loadTimer = setTimeout(function() {
-                $('.lds-css').fadeOut(1000);
-                ajaxOk();          
-                showScroll();
-                $("img").lazyload();
-            },1000);
-            // console.log('完成!')
+        complete: function () {
+            if(ifData) {
+                clearTimeout(loadTimer);
+                loadTimer = setTimeout(function () {
+                    ajaxOk();
+                    showScroll();
+                    $('.lds-css').fadeOut(1000);
+                    // $("img").lazyload();
+                    change();
+                }, 1000);
+            }
         }
     })
 
@@ -97,8 +103,8 @@ function showImgAndMask() {
                             <span class="prev btn1" id="prev"><img src="./images/prev.png" alt=""></span>
                             <span class="next btn1" id="next"><img src="./images/next.png" alt=""></span>
                         </div>`)
-    var createMask= $(`<div class="mask" id="mask"></div>`)
-    $('body').append(createImg,createMask)
+    var createMask = $(`<div class="mask" id="mask"></div>`)
+    $('body').append(createImg, createMask)
 }
 
 // 展示大图
@@ -131,112 +137,107 @@ function showImgDiv() {
 }
 
 // 自适应大小
-function changeImgSize(par,h,w,prev,next) {
+function changeImgSize(par, h, w, prev, next) {
     // console.log(h)
     // 判断图片大小
     if (h > w) {
-        if(h >= 3800) {
+        if (h >= 3800) {
             h = h * 0.175;
             w = w * 0.175;
-        }
-        else if(h >= 3000) {
+            // changeSize(w,h,0.9);
+        } else if (h >= 3000) {
             h = h * 0.205;
             w = w * 0.205;
-        }
-        else if(h >= 2500) {
+            // changeSize(w,h,0.9);
+        } else if (h >= 2500) {
             h = h * 0.225;
             w = w * 0.225;
-        }
-        else if(h >= 2200) {
+            // changeSize(w,h,0.9);
+        } else if (h >= 2200) {
             h = h * 0.325;
             w = w * 0.325;
-        }
-        else if(h >= 1920) {
+            // changeSize(w,h,0.9);
+        } else if (h >= 1920) {
             h = h * 0.355;
             w = w * 0.355;
-        }
-        else if(h >= 1500) {
+            // changeSize(w,h,0.9);
+        } else if (h >= 1500) {
             h = h * 0.505;
             w = w * 0.505;
-        }
-        else if(h >= 1280) {
+            // changeSize(w,h,0.9);
+        } else if (h >= 1280) {
             h = h * 0.555;
             w = w * 0.555;
-        }
-        else if (h >= 1000) {
+            // changeSize(w,h,0.9);
+        } else if (h >= 1000) {
             h = h * 0.655;
             w = w * 0.655;
+            // changeSize(w,h,0.9);
         } else if (h >= 700) {
             h = h * 0.855;
             w = w * 0.855;
+            // changeSize(w,h,0.9);
         }
 
         showImgChangePos(par, h, w, prev, next)
-    }
-    else if(w = h) {
-        if(h >= 3800) {
+    } else if (w = h) {
+        if (h >= 3800) {
             h = h * 0.175;
             w = w * 0.175;
-        }
-        else if(h >= 3000) {
+        } else if (h >= 3000) {
             h = h * 0.205;
             w = w * 0.205;
-        }
-        else if(h >= 2500) {
+        } else if (h >= 2500) {
             h = h * 0.225;
             w = w * 0.225;
-        }
-        else if(h >= 2200) {
+        } else if (h >= 2200) {
             h = h * 0.425;
             w = w * 0.425;
-        }
-        else if(h >= 1920) {
+        } else if (h >= 1920) {
             h = h * 0.555;
             w = w * 0.555;
-        }
-        else if(h >= 1500) {
+        } else if (h >= 1500) {
             h = h * 0.555;
             w = w * 0.555;
-        }
-        else if(h >= 1280) {
+        } else if (h >= 1280) {
             h = h * 0.555;
             w = w * 0.555;
-        }
-        else if (h >= 1000) {
+        } else if (h >= 1000) {
             h = h * 0.655;
             w = w * 0.655;
         } else if (h >= 700) {
             h = h * 0.855;
             w = w * 0.855;
         }
-    }
-    else {
-        if(w >= 3800) {
+    } else {
+        if (w >= 3800) {
             h = h * 0.185;
             w = w * 0.185;
-        }
-        else if(w >= 3000) {
+            // changeSize(w,h,0.9);
+        } else if (w >= 3000) {
             h = h * 0.205;
             w = w * 0.205;
-        }
-        else if(w >= 2500) {
+            // changeSize(w,h,0.9);
+        } else if (w >= 2500) {
             h = h * 0.355;
             w = w * 0.355;
-        }
-        else if(w >= 1920) {
+            // changeSize(w,h,0.9);
+        } else if (w >= 1920) {
             h = h * 0.65;
             w = w * 0.65;
-        }
-        else if(w >= 1500) {
+            // changeSize(w,h,0.9);
+        } else if (w >= 1500) {
             h = h * 0.85;
             w = w * 0.85;
-        }
-        else if (w >= 1000) {
+            // changeSize(w,h,0.9);
+        } else if (w >= 1000) {
             w = w * 0.75;
             h = h * 0.75;
+            // changeSize(w,h,0.9);
         } else if (w >= 700) {
             w = w * 0.95;
             h = h * 0.95;
+            // changeSize(w,h,0.9);
         }
 
         showImgChangePos(par, h, w, prev, next)
@@ -282,16 +283,16 @@ $('body').on('click', function (e) {
     showScroll();
 })
 $('#next').on('click', function () {
-    if (myindex < myarr.length-1) {
+    if (myindex < myarr.length - 1) {
         myindex++;
-        a = myindex+1;
+        a = myindex + 1;
         clickBtn();
     }
 })
 $('#prev').on('click', function () {
     if (myindex > 0) {
         myindex--;
-        a = myindex+1;
+        a = myindex + 1;
         clickBtn();
     }
 })
@@ -306,5 +307,3 @@ function clickBtn() {
     $('#show-img').attr('src', myarr[myindex]);
     changeImgSize($('#showImg'), h, w, $('#prev'), $('#next'))
 }
-
-
